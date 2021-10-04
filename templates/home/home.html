@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock title %}
+
+{% block homeactive %} active {% endblock homeactive %}
+
+{% block body %}
+<div class="container my-1">
+    <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+        <div class="col-md-10 px-0">
+          <h1 class="display-5 fst-italic">Welcome To MyBlog!</h1>
+          <p class="lead my-3">A blog is a discussion or informational website published on the World Wide Web consisting of discrete, often informal diary-style text entries. Many blogs provide commentary on a particular subject or topic, ranging from philosophy, religion, and arts to science, politics, and sports. 'Blog' and 'blogging' are now loosely used for content creation and sharing on social media, especially when the content is long-form and one creates and shares content on regular basis.</p>
+          <a href="/blog" role="button" class="btn btn-success">Go To Blog</a>
+        </div>
+      </div>
+</div>
+<div class="container">
+    <div class="row mb-2">
+    {% for post in allPosts|slice:"0:4" %}
+        <div class="col-md-6">
+          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-primary"><a href="/about" style="font-size: 20px; font-style: italic; text-decoration: none">{{post.author}}</a></strong>
+              <h3 class="mb-0">{{post.title}}</h3>
+              <div class="mb-1 text-muted">{{post.timeStamp}}</div>
+              <p class="card-text mb-auto">{{post.content|safe| truncatechars:200}}</p>
+              <a href="/blog/{{post.slug}}">Continue reading</a>
+            </div>
+            <div class="col-auto d-none d-lg-block">
+              <img src="/media/{{post.thumbnail}}" class="bd-placeholder-img" width="200" height="250" aria-label="Placeholder: Thumbnail">
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock body %}

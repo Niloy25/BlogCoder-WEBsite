@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} BlogHome {% endblock title %}
+
+{% block blogactive %} active {% endblock blogactive %}
+
+{% block body %}
+<div class="container my-3">
+    <h2>Articles in MyBlog:</h2>
+    {% for post in allPosts %}
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary" style="font-size:23px; font-style: italic">Article by {{post.author}}</strong>
+            <h3 class="mb-0"><a class="text-dark" style="text-decoration: none" href="/blog/{{post.slug}}">{{post.title}}</a></h3>
+            <div class="mb-1 text-muted">{{post.timeStamp}}</div>
+            <p class="card-text mb-auto">{{post.content|safe| truncatechars:400}}</p>
+            <div class="my-2">
+                <a href="/blog/{{post.slug}}" role="button" class="btn btn-success">Continue reading</a>
+            </div>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+            <img src="/media/{{post.thumbnail}}" class="bd-placeholder-img" width="200" height="250" aria-label="Placeholder: Thumbnail">
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock body %}
